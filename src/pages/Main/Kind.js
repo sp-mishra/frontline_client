@@ -48,6 +48,8 @@ function Kind({ reset, mode, setMode, save, appeal = null }) {
   }, [appeal]);
 
   function handleSubmit(formData) {
+    console.log(handleSubmit.name);
+    console.log(formData);
     if (formData) {
       // preset vaules
       formData.mode = mode;

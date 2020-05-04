@@ -20,8 +20,11 @@ export function getPaginationObject(
 }
 
 export function renderStatus(id, row, onResultClose) {
+  console.log(renderStatus.name, "id: ", id, " \nrow: ", row);
   const [status, setStatus] = React.useState(row.status);
   const [confirm, setConfirm] = React.useState(false);
+  console.log(renderStatus.name, "status: ", status, " \nsetStatus: ", setStatus);
+  console.log(renderStatus.name, "confirm: ", confirm, " \nsetConfirm: ", setConfirm);
 
   const handleChange = (value) => {
     setStatus(value);
@@ -33,12 +36,13 @@ export function renderStatus(id, row, onResultClose) {
       title="Are you sure want to update this request?"
       onConfirm={() => {
         // update status, TODO: spinner
-        console.log("call", id, status);
+        console.log("call: ", id, "status: ", status);
         onResultClose(id, status);
         setConfirm(false);
       }}
       onCancel={() => {
         // reset dropdown here
+        console.log(row.status);
         setStatus(row.status);
         setConfirm(false);
       }}

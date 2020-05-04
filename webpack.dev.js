@@ -11,7 +11,8 @@ module.exports = merge(common, {
     proxy: [
       {
         context: ["/api"],
-        target: "http://0.0.0.0:3080/",
+        // target: "http://0.0.0.0:8080/",
+        target: "http://ec2-34-222-175-59.us-west-2.compute.amazonaws.com:34716/",
         secure: false,
         changeOrigin: true,
         logLevel: "debug"

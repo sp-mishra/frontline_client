@@ -38,6 +38,7 @@ function SearchResults({
       render: (id, row) => renderStatus(id, row, onResultClose),
     },
   ];
+  console.table(result);
   return (
     <div>
       <div>

@@ -7,7 +7,9 @@ import options from "@utils/Options";
 import { formatSearchQuery } from "../utils";
 import ExportButton from "@components/Misc/ExportButton";
 
-function Report({
+const ACT = "volunteer";
+
+function VolunteerReport({
   result,
   mode,
   setMode,
@@ -17,11 +19,18 @@ function Report({
   service,
   setService,
   pagination,
+  dateRange,
+  setDateRange,
   exportCSV,
 }) {
   function onModeChange(value) {
     setMode(value);
   }
+
+  const onDateRangeChange = (value) => {
+    value ? setDateRange(value) : setDateRange([null, null]);
+  };
+
   function onRegionChange(value) {
     setRegion(value);
   }
@@ -29,10 +38,10 @@ function Report({
   function onServiceChange(value) {
     setService(value);
   }
-
+  
   function formatParams() {
     const query = formatSearchQuery({ mode, region, service });
-    query.act = "volunteer"; // fixed type field
+    query.act = ACT; // fixed type field
     return query;
   }
 
@@ -76,12 +85,15 @@ function Report({
     services: options.services.servicesTree,
     onServiceChange,
 
+    dateRange: dateRange,
+    onDateRangeChange,
+
     onSubmit: handleSearch,
   };
-
+  console.log(VolunteerReport.name, " searchProps: ", searchProps);
   return (
     <div style={{ textAlign: "left" }}>
-      <h2>Volunteer Reports</h2>
+      <h2>Volunteer (Reports)</h2>
       <div>
         <SelectorPanel {...searchProps} />
       </div>
@@ -104,4 +116,4 @@ function Report({
   );
 }
 
-export default connecter(Report);
+export default connecter(VolunteerReport);

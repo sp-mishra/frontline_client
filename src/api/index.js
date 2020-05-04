@@ -13,6 +13,7 @@ function authTokenHandler(config) {
       config.headers["Authorization"] = `Bearer ${authToken}`;
     }
   }
+  console.log(authTokenHandler.name, "config: ", config);
   return config;
 }
 
@@ -96,11 +97,13 @@ async function exportRequests(params) {
 // -- auth
 async function login(formData) {
   const res = await server.post(`/auth/login`, formData);
+  console.log(login.name, "\nres: ", res, "\nformData: ", formData);
   return res;
 }
 
 async function authCheck() {
   const res = await server.post(`/auth/check`);
+  console.log(authCheck.name, "\nres: ", res);
   return res;
 }
 

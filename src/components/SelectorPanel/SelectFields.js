@@ -30,11 +30,22 @@ export const statusOptions = () => [
   </Option>,
 ];
 
-export function StatusSelect({ status, onStatusChannge }) {
+// NGO Form
+export const ngoStatusOptions = () => [
+  <Option key="new" className="lightup cyan">
+    New
+  </Option>,
+  <Option key="verified" className="lightup orange">
+    Verified
+  </Option>,
+];
+
+export function StatusSelect({ status, onStatusChannge, act }) {
+  console.log(StatusSelect.name, "\nstatus: ", status, "\nact: ", act);
   return (
     <Select style={{ width: 100 }} value={status} onChange={onStatusChannge}>
       <Option value="">All</Option>
-      {statusOptions()}
+      {act && act === "ngo" ? ngoStatusOptions() : statusOptions()}
     </Select>
   );
 }

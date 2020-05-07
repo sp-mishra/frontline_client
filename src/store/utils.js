@@ -6,6 +6,7 @@ export const applyScope = (scope, types) =>
 
 // map util for selector
 export function createMap(data) {
+  console.log(createMap.name, "\ndata: ", data);
   const parsed = {};
   data.forEach((row) => {
     parsed[row.id] = row;
@@ -14,6 +15,7 @@ export function createMap(data) {
 }
 
 export function buildUserInfo(data) {
+  console.log(buildUserInfo.name, "\ndata: ", data);
   const res = {
     name: data.name || "",
     email: "__NA__",

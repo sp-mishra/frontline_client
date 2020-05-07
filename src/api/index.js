@@ -49,6 +49,7 @@ async function saveForm(formData) {
 
 async function search(params) {
   const res = await server.post(`/search/`, params);
+  console.log(search.name, "\params: ", params, "\nresult: ", res);
   return res.data.data || [];
 }
 
@@ -115,8 +116,16 @@ async function getHomePageData(url) {
 
 // Update status
 async function updateStatus(url, formData) {
+  console.log(updateStatus.name, "\nformData: ", formData, "\nurl: ", url);
   const res = await server.put(url, formData);
   return res || null;
+}
+
+// NGO Search
+async function searchNgoForm(params) {
+  const res = await server.post(`/ngo/search`, params);
+  console.log(searchNgoForm.name, "\params: ", params, "\nresult: ", res);
+  return res.data.data || [];;
 }
 
 export default {
@@ -135,4 +144,5 @@ export default {
   exportKind,
   exportRequests,
   updateStatus,
+  searchNgoForm,
 };

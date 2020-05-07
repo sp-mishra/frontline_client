@@ -3,13 +3,14 @@ import VolunteerReport from "../Reports/VolunteerReport";
 import KindReport from "../Reports/KindReport";
 import AppealReport from "../Reports/AppealReport";
 import RequestReport from '../Reports/RequestReport';
+import NGOReport from '../Reports/NGOReport';
 import FormToggle from "@components/FormToggle";
 import { Spacer } from "@components/Utils";
 import { Typography } from "antd";
 const { Title } = Typography;
 
 const reportsMap = {
-  ngo: { id: "ngo", value: "NGO", render: RequestReport },
+  ngo: { id: "ngo", value: "NGO Approval", render: NGOReport },
   volunteer: { id: "volunteer", value: "Volunteer", render: VolunteerReport },
   kind: { id: "kind", value: "Support in Kind", render: KindReport },
   // appeal: { id: "appeal", value: "Appeal", render: AppealReport },
@@ -25,7 +26,7 @@ const Placeholder = () => (
 
 const RenderPage = ({ type }) => {
   const PageToRender = type in reportsMap ? reportsMap[type].render : Placeholder;
-  console.log("type: ", type, "PageToRender: ", PageToRender);
+  console.log("type: ", type, "\nreportsMap: ", reportsMap, "\nPageToRender: ", PageToRender);
   return <PageToRender />;
 };
 

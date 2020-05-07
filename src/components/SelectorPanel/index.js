@@ -34,8 +34,21 @@ function SelectorPanel({
   onStatusChange,
 
   onSubmit,
+  // act props
+  act,
 }) {
   //console.log("sp", arguments[0]);
+  console.log(SelectorPanel.name,
+     "\n mode: ", mode,
+     "\n modes: ", modes,
+     "\n region: ", region,
+     "\n regions: ", regions,
+     "\n service: ", service,
+     "\n services: ", services,
+     "\n dateRange: ", dateRange,
+     "\n status: ", status,
+     "\n act: ", act,
+     )
   return (
     <div>
       {onModeChange ? (
@@ -88,7 +101,7 @@ function SelectorPanel({
 
         <div className={styles.selectorCo}>
           <span>Status</span>
-          <StatusSelect status={status} onStatusChannge={onStatusChange} />
+          <StatusSelect status={status} onStatusChannge={onStatusChange} act={act}/>
         </div>
         <Spacer />
 

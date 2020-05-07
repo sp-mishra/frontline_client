@@ -1,7 +1,7 @@
 import React from "react";
 import { Table } from "antd";
 import Details from "./Details";
-import { getPaginationObject, renderStatus } from "../utils";
+import { getPaginationObject } from "../utils";
 
 function SearchResults({ 
   result,

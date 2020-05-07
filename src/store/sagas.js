@@ -11,6 +11,7 @@ import { types as homeTypes } from "./homeContent";
 import { types as appealReportTypes } from "./appealReport";
 import { types as requestReportTypes } from "./requestReport";
 import { types as requestForHelpTypes } from "./requestForHelp";
+import { types as ngoReportTypes } from "./ngoReport";
 
 import notify from "@utils/Notification";
 import { authStorage } from "@utils/LocalStorage";
@@ -49,6 +50,8 @@ function* initVolunteerCount() {
 function* search(scope, apiFn, action) {
   try {
     const res = yield call(apiFn, action.params);
+    console.log(search.name, "\nscope: ", scope,
+    "\napiFn: ", apiFn, "\naction: ", action, "\nresult: ", res);
     yield put({ type: scope.SET_RESULT, result: res.docs || [] });
     yield put({
       type: scope.SET_PAGINATION,
@@ -79,6 +82,7 @@ function* fetchAppeals() {
 function* saveData(scope, action) {
   try {
     const res = yield call(Api.saveForm, action.formData);
+    console.log(saveData.name, "\nscope: ", scope, "\naction: ", action, "\nresult: ", res);
     if (res.data.status === 1) {
       notify.info(true, action.formData.name);
       yield put({ type: scope.SET_RESET });
@@ -94,6 +98,7 @@ function* saveData(scope, action) {
 function* saveRequestForHelp(scope, action) {
   try {
     const res = yield call(Api.saveHelpRequest, action.formData);
+    console.log(saveRequestForHelp.name, "\nscope: ", scope, "\naction: ", action, "\nresult: ", res);
     if (res.data.status === 1) {
       notify.base("Request submitted successfully.");
       yield put({ type: scope.SET_RESET });
@@ -109,6 +114,7 @@ function* saveRequestForHelp(scope, action) {
 function* saveAppealData(scope, action) {
   try {
     const res = yield call(Api.saveAppealForm, action.formData);
+    console.log(saveAppealData.name, "\nscope: ", scope, "\naction: ", action, "\nresult: ", res);
     if (res.data.status === 1) {
       notify.base(res.data.message);
       yield put({ type: scope.SET_RESET });
@@ -176,6 +182,7 @@ function* exportCSV(scope, apiFn, action) {
 
 function* updateStatusVal(scope, action) {
   const res = yield call(Api.updateStatus, action.endPoint, action.formData);
+  console.log(updateStatusVal.name, "\nscope: ", scope, "\naction: ", action, "\nresult: ", res);
   try {
     if (res.data.status === 1) {
       yield put({
@@ -189,6 +196,28 @@ function* updateStatusVal(scope, action) {
     }
   } catch (err) {
     notify.base("Server error", "Try posting data again");
+  }
+}
+
+// NGO Form Search
+function* searchNgoData(scope, action) {
+  try {
+    const res = yield call(Api.searchNgoForm, action.formData);
+    console.log(searchNgoData.name, "\nscope", scope,
+     "\naction: ", action,
+     "\nresult: ", res);
+     yield put({ type: scope.SET_RESULT, result: res.docs || [] });
+     yield put({
+       type: scope.SET_PAGINATION,
+       pagination: formatPagination(res),
+     });
+  } catch (err) {
+    if (err.response.status === 401) {
+      notify.base("Session expired", "Please login again");
+      yield put({ type: commonTypes.LOGOUT });
+    } else {
+      notify.base("Error, please reload and try again");
+    }
   }
 }
 
@@ -208,6 +237,8 @@ export function* initSaga() {
     requestReportTypes,
     Api.searchRequests
   );
+    // NGO Form Search
+    yield takeLatest(ngoReportTypes.SEARCH, searchNgoData, ngoReportTypes);
 
   // exports
   yield takeLatest(
@@ -251,6 +282,8 @@ export function* initSaga() {
     updateStatusVal,
     kindReportTypes
   );
+  // Update Status column of NGO
+  yield takeLatest(ngoReportTypes.UPDATE_STATUS, updateStatusVal, ngoReportTypes);
 
   // save volunteers and kind
   yield takeLatest(volunteerTypes.SAVE, saveData, volunteerTypes);

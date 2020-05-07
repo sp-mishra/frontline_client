@@ -2,6 +2,7 @@ import update from "immutability-helper";
 
 // generates dispatcher function for reports, accepts custom actions
 function generateReportDispatcher(types, custom = {}) {
+  console.log(generateReportDispatcher.name, "\ntypes: ", types, "\ncustom: ", custom);
   return (dispatch) => ({
     setResult: (result) =>
       dispatch({
@@ -55,6 +56,8 @@ function generateReportDispatcher(types, custom = {}) {
 
 // generates report reducer, accepts custom actions
 function generateReportReducer(types, initialState, customReducer = null) {
+  console.log(generateReportReducer.name, "\types: ", types,
+   "\ninitialState: ", initialState, "\ncustomReducer: ", customReducer);
   return (state = initialState, action) => {
     switch (action.type) {
       case types.SET_RESULT:

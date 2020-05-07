@@ -1,6 +1,6 @@
 import React from "react";
 import { Select, Popconfirm } from "antd";
-import { statusOptions } from "@components/SelectorPanel/SelectFields";
+import { statusOptions, ngoStatusOptions } from "@components/SelectorPanel/SelectFields";
 
 // search results pagination format helper
 export function getPaginationObject(
@@ -20,13 +20,12 @@ export function getPaginationObject(
 }
 
 export function renderStatus(id, row, onResultClose) {
-  console.log(renderStatus.name, "id: ", id, " \nrow: ", row);
   const [status, setStatus] = React.useState(row.status);
   const [confirm, setConfirm] = React.useState(false);
-  console.log(renderStatus.name, "status: ", status, " \nsetStatus: ", setStatus);
-  console.log(renderStatus.name, "confirm: ", confirm, " \nsetConfirm: ", setConfirm);
+  console.log(renderStatus.name, "id: ", id, " \nrow: ", row, "\nstatus: ", status, "\nconfirm: ", confirm);
 
   const handleChange = (value) => {
+    console.log(handleChange.name, " value: ", value);
     setStatus(value);
     setConfirm(true);
   };
@@ -51,13 +50,14 @@ export function renderStatus(id, row, onResultClose) {
       visible={confirm}
     >
       <Select
-        size={"small"}
+        // size={"default"}
+        size={{ width: 100 }}
         placeholder="Actions"
         value={status}
         onChange={handleChange}
         className="lightup red"
       >
-        {statusOptions()}
+        {row.act && row.act === "ngo" ? ngoStatusOptions() : statusOptions()}
       </Select>
     </Popconfirm>
   );

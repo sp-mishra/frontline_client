@@ -1,9 +1,9 @@
 import React from "react";
 import { Table } from "antd";
 import Details from "./Details";
-import { getPaginationObject, renderStatus } from "../utils";
+import { getPaginationObject, renderStatus  } from "../utils";
 
-function SearchResults({
+function NGOSearchResults({ 
   result,
   pagination,
   onPageChange,
@@ -16,21 +16,25 @@ function SearchResults({
       dataIndex: "name",
       key: "name",
     },
-    {
-      title: "Type",
-      dataIndex: "mode",
-    },
-    {
-      title: "Region",
-      dataIndex: "region",
-    },
+    // {
+    //   title: "Region",
+    //   dataIndex: "region",
+    // },
     {
       title: "Mobile",
       dataIndex: "mobile",
     },
     {
-      title: "Submitted At",
+      title: "Date",
       dataIndex: "createdAt",
+    },
+    {
+      title: "Contact Person",
+      dataIndex: "person",
+    },
+    {
+      title: "Covid-19 Services",
+      dataIndex: "covid19",
     },
     {
       title: "Action",
@@ -38,7 +42,7 @@ function SearchResults({
       render: (id, row) => renderStatus(id, row, onResultClose),
     },
   ];
-  console.log("KindSearchResults", "\ncolumns: ", columns, "\nresult: ", result);
+  console.log(NGOSearchResults.name, "\nresult: ", result);
   return (
     <div>
       <div>
@@ -66,4 +70,4 @@ function SearchResults({
   );
 }
 
-export default SearchResults;
+export default NGOSearchResults;

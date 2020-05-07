@@ -7,6 +7,7 @@ import createSagaMiddleware from "redux-saga";
 import { initSaga } from "./sagas";
 import kindReducer from "./kind";
 import kindReportReducer from "./kindReport";
+import ngoReportReducer from "./ngoReport";
 import requestReportReducer from './requestReport';
 import appealReducer from "./appeal";
 import appealReportReducer from "./appealReport";
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   appealReport: appealReportReducer,
   requestReport: requestReportReducer,
   requestForHelp: requestForHelpReducer,
+  ngoReport: ngoReportReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));

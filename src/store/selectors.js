@@ -5,6 +5,7 @@ const selector = (state) => state;
 
 // page scope selector
 const genScopeSelector = (scope) => {
+  console.log(genScopeSelector.name, "scope: ", scope);
   return createSelector([selector], (state) => state[scope]);
 };
 
@@ -13,6 +14,7 @@ const genScopeSelector = (scope) => {
 // - key will become the result key
 // - value has to be a selector
 export const pageSelector = (scope, selectors = {}) => {
+  console.log(pageSelector.name, "scope: ", scope, "selectors: ", selectors);
   const scopeSelector = genScopeSelector(scope);
   const keys = Object.keys(selectors);
 

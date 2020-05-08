@@ -16,10 +16,6 @@ function NGOSearchResults({
       dataIndex: "name",
       key: "name",
     },
-    // {
-    //   title: "Region",
-    //   dataIndex: "region",
-    // },
     {
       title: "Mobile",
       dataIndex: "mobile",

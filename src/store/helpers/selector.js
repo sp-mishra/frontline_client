@@ -9,9 +9,12 @@ function generateResultSelector(scope) {
   console.log(generateResultSelector.name, "getResult: ", getResult);
   // prase result
   const parsedResultSelector = createSelector([getResult], (result) => {
-    console.log(parsedResultSelector.name, "\nresult: ",
-     result, "\nscope: ", scope, "\ngetResult: ", getResult);
     const parsedResult = parseData(result);
+    console.log(parsedResultSelector.name,
+    "\nresult: ", result,
+    "\nscope: ", scope,
+    "\nparsedResult: ", parsedResult,
+    "\ngetResult: ", getResult);
     return parsedResult;
   });
 

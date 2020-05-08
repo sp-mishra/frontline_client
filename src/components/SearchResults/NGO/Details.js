@@ -1,5 +1,5 @@
 import React from "react";
-import { Descriptions, Table, Tag, Space } from "antd";
+import { Descriptions, Table } from "antd";
 import { getString } from "@utils/Parser/strUtils";
 const { Item } = Descriptions;
 
@@ -24,44 +24,7 @@ const columns = [
   },
 ];
 
-// const data = [
-//   {
-//     zone: 'zone1',
-//     ward: 'ward1',
-//     pins: ['123', '1234'],
-//   },
-//   {
-//     zone: 'zone2',
-//     ward: 'ward2',
-//     pins: ['123', '1234'],
-//   },
-//   {
-//     zone: 'zone3',
-//     ward: 'ward3',
-//     pins: ['123', '1234'],
-//   },
-//   {
-//     zone: 'zone1',
-//     ward: 'ward1',
-//     pins: ['123', '1234'],
-//   },
-//   {
-//     zone: 'zone2',
-//     ward: 'ward2',
-//     pins: ['123', '1234'],
-//   },
-//   {
-//     zone: 'zone3',
-//     ward: 'ward3',
-//     pins: ['123', '1234'],
-//   },
-// ];
-
 function Details({ record }) {
-  // const renderExtra =
-  //   record.mode.toLowerCase() == "individual"
-  //     ? getIndividualDetails
-  //     : getOrganizationDetails;
   return (
     <Descriptions title="Details" bordered size="middle">
       <Item label="EMail" span={3}>
@@ -78,10 +41,6 @@ function Details({ record }) {
       <Item label="Number Of Volunteers" span={3}>
         {getString(record.nov)}
       </Item>
-      {/* <Item label="Services" span={3}>
-        {getString(record.covid19)}
-      </Item> */}
-      {/* <Item label="Pin Code">{record.pin}</Item> */}
       <div>
         <Table columns={columns}
          dataSource={record.bbmp} />
@@ -90,56 +49,17 @@ function Details({ record }) {
   );
 }
 
-function getIndividualDetails(record) {
-  const rec = record.individual;
-  return [
-    <Item key="qualification" label="Educational Qualification">
-      {rec.qualification}
-    </Item>,
-    <Item key="profession" label="Profession">
-      {rec.profession}
-    </Item>,
-    <Item key="gender" label="Gender">
-      {rec.gender}
-    </Item>,
-    <Item key="dob" label="Date of Birth">
-      {rec.dob}
-    </Item>,
-  ];
-}
-
-function getOrganizationDetails(record) {
-  const rec = record.organization;
-  return [
-    <Item key="org_head" label="Head of Organization">
-      {rec.head}
-    </Item>,
-    <Item key="org_person" label="Nodal Person">
-      {rec.person}
-    </Item>,
-    <Item key="org_type" label="Type of Organization">
-      {rec.cat}
-    </Item>,
-    <Item key="org_nov" label="Number of Volunteers">
-      {rec.nov}
-    </Item>,
-    <Item key="org_reg" label="Registration Number">
-      {rec.reg}
-    </Item>,
-  ];
-}
-
 function getRegions(record) {
   let res = null;
+  console.log(getRegions.name,
+    "\nrecord: ", record);
   if(record.region) {
     if(Array.isArray(record.region)) {
       res = record.region.join(', ');
     } else {
       res = record.region;
     }
-    console.log(getRegions.name,
-       "\nrecord.region: ", record.region,
-       "\nres: ", res);
   }
+  return res;
 }
 export default Details;

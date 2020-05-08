@@ -202,10 +202,12 @@ function* updateStatusVal(scope, action) {
 // NGO Form Search
 function* searchNgoData(scope, action) {
   try {
-    const res = yield call(Api.searchNgoForm, action.formData);
+    const res = yield call(Api.searchNgoForm, action.params);
     console.log(searchNgoData.name, "\nscope", scope,
      "\naction: ", action,
-     "\nresult: ", res);
+     "\nresult: ", res,
+     "\nres.docs: ", res.docs,
+     "\nformatPagination(res): ", formatPagination(res));
      yield put({ type: scope.SET_RESULT, result: res.docs || [] });
      yield put({
        type: scope.SET_PAGINATION,

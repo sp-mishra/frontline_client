@@ -49,7 +49,7 @@ async function saveForm(formData) {
 
 async function search(params) {
   const res = await server.post(`/search/`, params);
-  console.log(search.name, "\params: ", params, "\nresult: ", res);
+  console.log(search.name, "\nparams: ", params, "\nresult: ", res);
   return res.data.data || [];
 }
 
@@ -124,8 +124,8 @@ async function updateStatus(url, formData) {
 // NGO Search
 async function searchNgoForm(params) {
   const res = await server.post(`/ngo/search`, params);
-  console.log(searchNgoForm.name, "\params: ", params, "\nresult: ", res);
-  return res.data.data || [];;
+  console.log(searchNgoForm.name, "\nparams: ", params, "\nresult: ", res);
+  return res.data.data || [];
 }
 
 export default {
